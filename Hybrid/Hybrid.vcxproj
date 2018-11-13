@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{648BAA91-5D89-48B6-BF36-5CBB5E7082AA}</ProjectGuid>
+    <RootNamespace>Hybrid</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw\include;C:\Users\david\source\repos\Hybrid\Hybrid\libs</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw;C:\Users\david\source\repos\Hybrid\Hybrid\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lib-vc2015/glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glew-2.1.0\include;C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw\include;C:\Users\david\source\repos\Hybrid\Hybrid\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glew-2.1.0\lib\Release\x64;C:\Users\david\source\repos\Hybrid\Hybrid\libs\Box2D;C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw\include;C:\Users\david\source\repos\Hybrid\Hybrid\libs</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw;C:\Users\david\source\repos\Hybrid\Hybrid\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lib-vc2015/glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glew-2.1.0\include;C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw\include;C:\Users\david\source\repos\Hybrid\Hybrid\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Users\david\source\repos\Hybrid\Hybrid\libs\glew-2.1.0\lib\Release\x64;C:\Users\david\source\repos\Hybrid\Hybrid\libs\Box2D;C:\Users\david\source\repos\Hybrid\Hybrid\libs\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="libs\Box2D\Collision\b2BroadPhase.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\b2CollideCircle.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\b2CollideEdge.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\b2CollidePolygon.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\b2Collision.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\b2Distance.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\b2DynamicTree.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\b2TimeOfImpact.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\Shapes\b2ChainShape.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\Shapes\b2CircleShape.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\Shapes\b2EdgeShape.cpp" />
+    <ClCompile Include="libs\Box2D\Collision\Shapes\b2PolygonShape.cpp" />
+    <ClCompile Include="libs\Box2D\Common\b2BlockAllocator.cpp" />
+    <ClCompile Include="libs\Box2D\Common\b2Draw.cpp" />
+    <ClCompile Include="libs\Box2D\Common\b2Math.cpp" />
+    <ClCompile Include="libs\Box2D\Common\b2Settings.cpp" />
+    <ClCompile Include="libs\Box2D\Common\b2StackAllocator.cpp" />
+    <ClCompile Include="libs\Box2D\Common\b2Timer.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\b2Body.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\b2ContactManager.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\b2Fixture.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\b2Island.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\b2World.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\b2WorldCallbacks.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2CircleContact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2Contact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2ContactSolver.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Contacts\b2PolygonContact.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2DistanceJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2FrictionJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2GearJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2Joint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2MotorJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2MouseJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2PulleyJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2RopeJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
+    <ClCompile Include="libs\Box2D\Rope\b2Rope.cpp" />
+    <ClCompile Include="src\Engine\Graphics\GL\VAO.cpp" />
+    <ClCompile Include="src\Engine\Screen.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Engine\GameEngine.cpp" />
+    <ClCompile Include="src\Engine\Shaders\Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="libs\Box2D\Box2D.h" />
+    <ClInclude Include="libs\Box2D\Collision\b2BroadPhase.h" />
+    <ClInclude Include="libs\Box2D\Collision\b2Collision.h" />
+    <ClInclude Include="libs\Box2D\Collision\b2Distance.h" />
+    <ClInclude Include="libs\Box2D\Collision\b2DynamicTree.h" />
+    <ClInclude Include="libs\Box2D\Collision\b2TimeOfImpact.h" />
+    <ClInclude Include="libs\Box2D\Collision\Shapes\b2ChainShape.h" />
+    <ClInclude Include="libs\Box2D\Collision\Shapes\b2CircleShape.h" />
+    <ClInclude Include="libs\Box2D\Collision\Shapes\b2EdgeShape.h" />
+    <ClInclude Include="libs\Box2D\Collision\Shapes\b2PolygonShape.h" />
+    <ClInclude Include="libs\Box2D\Collision\Shapes\b2Shape.h" />
+    <ClInclude Include="libs\Box2D\Common\b2BlockAllocator.h" />
+    <ClInclude Include="libs\Box2D\Common\b2Draw.h" />
+    <ClInclude Include="libs\Box2D\Common\b2GrowableStack.h" />
+    <ClInclude Include="libs\Box2D\Common\b2Math.h" />
+    <ClInclude Include="libs\Box2D\Common\b2Settings.h" />
+    <ClInclude Include="libs\Box2D\Common\b2StackAllocator.h" />
+    <ClInclude Include="libs\Box2D\Common\b2Timer.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\b2Body.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\b2ContactManager.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\b2Fixture.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\b2Island.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\b2TimeStep.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\b2World.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\b2WorldCallbacks.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2CircleContact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2Contact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2ContactSolver.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Contacts\b2PolygonContact.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2DistanceJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2FrictionJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2GearJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2Joint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2MotorJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2MouseJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2PrismaticJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2PulleyJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2RevoluteJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2RopeJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2WeldJoint.h" />
+    <ClInclude Include="libs\Box2D\Dynamics\Joints\b2WheelJoint.h" />
+    <ClInclude Include="libs\Box2D\Rope\b2Rope.h" />
+    <ClInclude Include="libs\glfw\deps\getopt.h" />
+    <ClInclude Include="libs\glfw\deps\linmath.h" />
+    <ClInclude Include="libs\glfw\deps\mingw\dinput.h" />
+    <ClInclude Include="libs\glfw\deps\mingw\xinput.h" />
+    <ClInclude Include="libs\glfw\deps\tinycthread.h" />
+    <ClInclude Include="libs\glfw\deps\vulkan\vulkan.h" />
+    <ClInclude Include="src\Engine\Exceptions.h" />
+    <ClInclude Include="src\Engine\GameEngine.h" />
+    <ClInclude Include="src\Engine\Graphics\GL\VAO.h" />
+    <ClInclude Include="src\Engine\Screen.h" />
+    <ClInclude Include="src\Engine\Shaders\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\fragment.shader" />
+    <None Include="res\shaders\vertex.shader" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
