@@ -13,16 +13,15 @@ class Shader
 	GLenum m_type;
 public:
 	Shader(std::string shaderSource, GLenum shaderType);
-	~Shader();
 
 	bool compile();
 	bool isCompiled();
+	void deleteShader();
 	std::string getError();
 	GLuint getShaderId() { return m_id; };
-protected:
+private:
 	std::string m_source;
 	void updateSource(std::string updatedSource);
-	void deleteShader();
 };
 
 class ShaderProgram
@@ -31,9 +30,10 @@ class ShaderProgram
 	Shader* m_vertex;
 	Shader* m_fragment;
 public:
-	ShaderProgram(Shader* vertexShader, Shader* fragmentShader);
+	ShaderProgram(std::string vertexSource, std::string fragmentSource);
 	~ShaderProgram();
 
+	void deleteProgram();
 	void use();
 	bool link();
 	bool isLinked();

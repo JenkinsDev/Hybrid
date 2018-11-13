@@ -30,7 +30,7 @@ FileLoadStatus loadFile(std::string file_path, std::string* out) {
 	return FileLoadStatus::Error;
 }
 
-ShaderProgram loadShaders(std::string vertex_file_path, std::string fragment_file_path) {
+ShaderProgram* loadShaders(std::string vertex_file_path, std::string fragment_file_path) {
 	std::string vertexShaderCode;
 	if (loadFile(vertex_file_path, &vertexShaderCode) == FileLoadStatus::Error) {
 		printf("Can't open vertex shared %s.", vertex_file_path.c_str());
@@ -43,10 +43,7 @@ ShaderProgram loadShaders(std::string vertex_file_path, std::string fragment_fil
 		getchar();
 	}
 
-	Shader* vertexShader = new Shader(vertexShaderCode, GL_VERTEX_SHADER);
-	Shader* fragmentShader = new Shader(fragmentShaderCode, GL_FRAGMENT_SHADER);
-	ShaderProgram program(vertexShader, fragmentShader);
-
+	ShaderProgram* program = new ShaderProgram(vertexShaderCode, fragmentShaderCode);
 	return program;
 }
 
@@ -78,15 +75,15 @@ int main() {
 	// Give our triangle vertices to OpenGL
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-	ShaderProgram shaderProgram = loadShaders("./res/shaders/vertex.shader", "./res/shaders/fragment.shader");
-	if (!shaderProgram.link()) {
-		fprintf(stderr, "Failed to link shader program: %s", shaderProgram.getError().c_str());
+	ShaderProgram* shaderProgram = loadShaders("./res/shaders/vertex.shader", "./res/shaders/fragment.shader");
+	if (!shaderProgram->link()) {
+		fprintf(stderr, "Failed to link shader program: %s", shaderProgram->getError().c_str());
 	}
 
 	while (!glfwWindowShouldClose(screen.getWindow())) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shaderProgram.use();
+		shaderProgram->use();
 
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

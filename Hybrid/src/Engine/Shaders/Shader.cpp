@@ -1,13 +1,22 @@
 #include "Shader.h"
 
-ShaderProgram::ShaderProgram(Shader* vertexShader, Shader* fragmentShader)
-	: m_vertex(vertexShader), m_fragment(fragmentShader)
+ShaderProgram::ShaderProgram(std::string vertexSource, std::string fragmentSource)
 {
 	m_id = glCreateProgram();
+	m_vertex = new Shader(vertexSource, GL_VERTEX_SHADER);
+	m_fragment = new Shader(fragmentSource, GL_FRAGMENT_SHADER);
 }
 
 ShaderProgram::~ShaderProgram() {
+	if (m_vertex != nullptr) delete m_vertex;
+	if (m_fragment != nullptr) delete m_fragment;
+}
+
+void ShaderProgram::deleteProgram() {
+	m_vertex->deleteShader();
 	delete m_vertex;
+
+	m_fragment->deleteShader();
 	delete m_fragment;
 
 	glDeleteProgram(m_id);
@@ -74,10 +83,6 @@ Shader::Shader(std::string shaderSource, GLenum type)
 
 	m_id = glCreateShader(m_type);
 	updateSource(shaderSource);
-}
-
-Shader::~Shader() {
-	deleteShader();
 }
 
 void Shader::deleteShader() {
