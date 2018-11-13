@@ -5,7 +5,7 @@
 #include <sstream>
 #include <vector>
 #include "Engine/GameEngine.h"
-#include "Engine/Shaders/Shader.h"
+#include "Engine/Graphics/Shaders/Shader.h"
 #include "Engine/Graphics/GL/VAO.h"
 
 enum class FileLoadStatus

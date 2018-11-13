@@ -156,9 +156,6 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Shaders\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\GameEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -166,6 +163,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Graphics\GL\VAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Graphics\Shaders\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -329,9 +329,6 @@
     <ClInclude Include="libs\glfw\deps\tinycthread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Shaders\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine\Exceptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -342,6 +339,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Graphics\GL\VAO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Graphics\Shaders\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

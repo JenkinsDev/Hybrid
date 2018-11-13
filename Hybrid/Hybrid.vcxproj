@@ -192,7 +192,7 @@
     <ClCompile Include="src\Engine\Screen.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Engine\GameEngine.cpp" />
-    <ClCompile Include="src\Engine\Shaders\Shader.cpp" />
+    <ClCompile Include="src\Engine\Graphics\Shaders\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\Box2D\Box2D.h" />
@@ -252,7 +252,7 @@
     <ClInclude Include="src\Engine\GameEngine.h" />
     <ClInclude Include="src\Engine\Graphics\GL\VAO.h" />
     <ClInclude Include="src\Engine\Screen.h" />
-    <ClInclude Include="src\Engine\Shaders\Shader.h" />
+    <ClInclude Include="src\Engine\Graphics\Shaders\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\fragment.shader" />
