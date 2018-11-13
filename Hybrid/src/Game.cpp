@@ -57,11 +57,12 @@ int main() {
 	VAO vao;
 	vao.bind();
 
-	// Array of 3 vectors which represent 3 vertices
+	// Array of vec3's which represent 4 vertices
 	static const GLfloat g_vertex_buffer_data[] = {
 		0.0f, 0.2f, 0.0f,
 		0.0f, 0.0f, 0.0f,
 		0.2f, 0.0f, 0.0f,
+		0.2f, 0.2f, 0.0f,
 	};
 
 	// Create our variable that we will store our buffer in,
@@ -80,7 +81,7 @@ int main() {
 		fprintf(stderr, "Failed to link shader program: %s", shaderProgram->getError().c_str());
 	}
 
-	while (!glfwWindowShouldClose(screen.getWindow())) {
+	while (engine.isRunning()) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram->use();
@@ -89,7 +90,7 @@ int main() {
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_LINE_LOOP, 0, 4);
 		glDisableVertexAttribArray(0);
 
 		glfwSwapBuffers(screen.getWindow());

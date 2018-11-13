@@ -19,6 +19,13 @@ GameEngine::~GameEngine() {
 	glfwTerminate();
 }
 
+void GameEngine::changeActiveScreen(Screen* screen) {
+	m_screen = screen;
+	glfwMakeContextCurrent(screen->getWindow());
+
+	if (!m_isGLInitialized) initializeGlew();
+}
+
 void GameEngine::initializeGlew() {
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
@@ -36,9 +43,6 @@ void GameEngine::initializeGlew() {
 	printf("OpenGL Version Supported %s\n", version);
 }
 
-void GameEngine::changeActiveScreen(Screen* screen) {
-	m_screen = screen;
-	glfwMakeContextCurrent(screen->getWindow());
-
-	if (!m_isGLInitialized) initializeGlew();
+bool GameEngine::isRunning() {
+	return !glfwWindowShouldClose(m_screen->getWindow());
 }

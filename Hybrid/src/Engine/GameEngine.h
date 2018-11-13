@@ -13,6 +13,7 @@ public:
 	GameEngine();
 	~GameEngine();
 	void changeActiveScreen(Screen* screen);
+	bool isRunning();
 private:
 	bool m_isGLInitialized = false;
 	Screen* m_screen;
