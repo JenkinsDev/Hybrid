@@ -253,6 +253,7 @@
     <ClInclude Include="src\Engine\Exceptions.h" />
     <ClInclude Include="src\Engine\GameEngine.h" />
     <ClInclude Include="src\Engine\Graphics\GL\VAO.h" />
+    <ClInclude Include="src\Engine\Graphics\GL\VBO.h" />
     <ClInclude Include="src\Engine\IO\File.h" />
     <ClInclude Include="src\Engine\IO\Input.h" />
     <ClInclude Include="src\Engine\Screen.h" />

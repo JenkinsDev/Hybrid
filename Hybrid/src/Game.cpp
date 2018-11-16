@@ -1,10 +1,26 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <algorithm>
+#include <array>
+#include <iterator>
 #include "Engine/IO/Input.h"
 #include "Engine/IO/File.h"
 #include "Engine/GameEngine.h"
 #include "Engine/Graphics/Shaders/Shader.h"
 #include "Engine/Graphics/GL/VAO.h"
+
+template <size_t N>
+void adjustVertexData(std::array<GLfloat, N> vertexPos, GLint vbo, float xOffset, float yOffset) {
+	std::array<GLfloat, N> newPos;
+	std::copy(vertexPos.begin(), vertexPos.end(), &newPos[0]);
+
+	for (int i = 0; i < N; i += 3) {
+		newPos[i] += xOffset;
+		newPos[i + 1] += yOffset;
+	}
+
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertexPos), &newPos[0]);
+}
 
 std::unique_ptr<ShaderProgram> loadShaders(std::string vertex_file_path, std::string fragment_file_path) {
 	std::string vertexShaderCode;
@@ -36,7 +52,7 @@ int main() {
 	vao.bind();
 
 	// Array of vec3's which represent 4 vertices
-	static const GLfloat g_vertex_buffer_data[] = {
+	std::array<GLfloat, 12> g_vertex_buffer_data = {
 		0.0f, 0.2f, 0.0f,
 		0.0f, 0.0f, 0.0f,
 		0.2f, 0.0f, 0.0f,
@@ -52,7 +68,7 @@ int main() {
 	// on that buffer.
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	// Give our triangle vertices to OpenGL
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), &g_vertex_buffer_data[0], GL_STREAM_DRAW);
 
 	std::unique_ptr<ShaderProgram> shaderProgram = loadShaders("./res/shaders/vertex.shader", "./res/shaders/fragment.shader");
 	if (!shaderProgram->link()) {
@@ -60,21 +76,39 @@ int main() {
 		return 1;
 	}
 
+	float xOffset = 0;
+	float yOffset = 0;
+
 	while (engine.isRunning()) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram->use();
 
 		if (isKeyDown(Key::W)) {
-			printf("Left Key Down");
+			yOffset += 0.01f;
+		}
+		else if (isKeyDown(Key::S)) {
+			yOffset -= 0.01f;
+		}
+
+		if (isKeyDown(Key::D)) {
+			xOffset += 0.01f;
+		}
+		else if (isKeyDown(Key::A)) {
+			xOffset -= 0.01f;
 		}
 
 		glEnableVertexAttribArray(0);
+
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		adjustVertexData(g_vertex_buffer_data, vertexbuffer, xOffset, yOffset);
+
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
 		glDrawArrays(GL_LINE_LOOP, 0, 4);
+
 		glDisableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		glfwSwapBuffers(screen.getWindow());
 		glfwPollEvents();

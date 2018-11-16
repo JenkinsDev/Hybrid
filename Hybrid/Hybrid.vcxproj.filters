@@ -356,6 +356,9 @@
     <ClInclude Include="src\Engine\IO\File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Graphics\GL\VBO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\fragment.shader" />
