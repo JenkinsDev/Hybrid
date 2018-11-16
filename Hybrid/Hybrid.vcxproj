@@ -189,6 +189,8 @@
     <ClCompile Include="libs\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
     <ClCompile Include="libs\Box2D\Rope\b2Rope.cpp" />
     <ClCompile Include="src\Engine\Graphics\GL\VAO.cpp" />
+    <ClCompile Include="src\Engine\IO\File.cpp" />
+    <ClCompile Include="src\Engine\IO\Input.cpp" />
     <ClCompile Include="src\Engine\Screen.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Engine\GameEngine.cpp" />
@@ -251,12 +253,15 @@
     <ClInclude Include="src\Engine\Exceptions.h" />
     <ClInclude Include="src\Engine\GameEngine.h" />
     <ClInclude Include="src\Engine\Graphics\GL\VAO.h" />
+    <ClInclude Include="src\Engine\IO\File.h" />
+    <ClInclude Include="src\Engine\IO\Input.h" />
     <ClInclude Include="src\Engine\Screen.h" />
     <ClInclude Include="src\Engine\Graphics\Shaders\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\fragment.shader" />
     <None Include="res\shaders\vertex.shader" />
+    <None Include="src\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

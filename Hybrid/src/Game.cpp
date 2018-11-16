@@ -1,36 +1,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <stdio.h>
-#include <fstream>
-#include <sstream>
-#include <vector>
+#include "Engine/IO/Input.h"
+#include "Engine/IO/File.h"
 #include "Engine/GameEngine.h"
 #include "Engine/Graphics/Shaders/Shader.h"
 #include "Engine/Graphics/GL/VAO.h"
 
-enum class FileLoadStatus
-{
-	Error = 0x0,
-	Success = 0x1
-};
-
-FileLoadStatus loadFile(std::string file_path, std::string* out) {
-	std::ifstream fileStream(file_path, std::ios::in);
-
-	if (fileStream.is_open()) {
-		std::stringstream sstr;
-		sstr << fileStream.rdbuf();
-
-		*out = sstr.str();
-
-		fileStream.close();
-		return FileLoadStatus::Success;
-	}
-
-	return FileLoadStatus::Error;
-}
-
-ShaderProgram* loadShaders(std::string vertex_file_path, std::string fragment_file_path) {
+std::unique_ptr<ShaderProgram> loadShaders(std::string vertex_file_path, std::string fragment_file_path) {
 	std::string vertexShaderCode;
 	if (loadFile(vertex_file_path, &vertexShaderCode) == FileLoadStatus::Error) {
 		printf("Can't open vertex shared %s.", vertex_file_path.c_str());
@@ -43,7 +19,9 @@ ShaderProgram* loadShaders(std::string vertex_file_path, std::string fragment_fi
 		getchar();
 	}
 
-	ShaderProgram* program = new ShaderProgram(vertexShaderCode, fragmentShaderCode);
+	std::unique_ptr<ShaderProgram> program;
+	program.reset(new ShaderProgram(vertexShaderCode, fragmentShaderCode));
+
 	return program;
 }
 
@@ -76,15 +54,20 @@ int main() {
 	// Give our triangle vertices to OpenGL
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-	ShaderProgram* shaderProgram = loadShaders("./res/shaders/vertex.shader", "./res/shaders/fragment.shader");
+	std::unique_ptr<ShaderProgram> shaderProgram = loadShaders("./res/shaders/vertex.shader", "./res/shaders/fragment.shader");
 	if (!shaderProgram->link()) {
 		fprintf(stderr, "Failed to link shader program: %s", shaderProgram->getError().c_str());
+		return 1;
 	}
 
 	while (engine.isRunning()) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram->use();
+
+		if (isKeyDown(Key::W)) {
+			printf("Left Key Down");
+		}
 
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
