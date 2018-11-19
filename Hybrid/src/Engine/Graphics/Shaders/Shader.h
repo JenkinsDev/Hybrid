@@ -27,8 +27,8 @@ private:
 class ShaderProgram
 {
 	GLuint m_id;
-	std::shared_ptr<Shader> m_vertex;
-	std::shared_ptr<Shader> m_fragment;
+	std::unique_ptr<Shader> m_vertex;
+	std::unique_ptr<Shader> m_fragment;
 public:
 	ShaderProgram(std::string vertexSource, std::string fragmentSource);
 	~ShaderProgram();

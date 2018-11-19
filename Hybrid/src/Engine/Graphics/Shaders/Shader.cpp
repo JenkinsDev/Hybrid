@@ -3,8 +3,8 @@
 ShaderProgram::ShaderProgram(std::string vertexSource, std::string fragmentSource)
 {
 	m_id = glCreateProgram();
-	m_vertex = std::shared_ptr<Shader>(new Shader(vertexSource, GL_VERTEX_SHADER));
-	m_fragment = std::shared_ptr<Shader>(new Shader(fragmentSource, GL_FRAGMENT_SHADER));
+	m_vertex = std::make_unique<Shader>(vertexSource, GL_VERTEX_SHADER);
+	m_fragment = std::make_unique<Shader>(fragmentSource, GL_FRAGMENT_SHADER);
 }
 
 ShaderProgram::~ShaderProgram() {
