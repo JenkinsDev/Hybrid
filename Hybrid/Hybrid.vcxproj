@@ -250,14 +250,19 @@
     <ClInclude Include="libs\glfw\deps\mingw\xinput.h" />
     <ClInclude Include="libs\glfw\deps\tinycthread.h" />
     <ClInclude Include="libs\glfw\deps\vulkan\vulkan.h" />
+    <ClInclude Include="src\Engine\ECS\Component.h" />
+    <ClInclude Include="src\Engine\ECS\System.h" />
     <ClInclude Include="src\Engine\Exceptions.h" />
     <ClInclude Include="src\Engine\GameEngine.h" />
     <ClInclude Include="src\Engine\Graphics\GL\VAO.h" />
     <ClInclude Include="src\Engine\Graphics\GL\VBO.h" />
     <ClInclude Include="src\Engine\IO\File.h" />
     <ClInclude Include="src\Engine\IO\Input.h" />
+    <ClInclude Include="src\Engine\ECS\Entity.h" />
     <ClInclude Include="src\Engine\Screen.h" />
     <ClInclude Include="src\Engine\Graphics\Shaders\Shader.h" />
+    <ClInclude Include="src\Engine\Type.h" />
+    <ClInclude Include="src\Game.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\fragment.shader" />

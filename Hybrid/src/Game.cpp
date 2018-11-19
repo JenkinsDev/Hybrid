@@ -1,6 +1,3 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <algorithm>
 #include <array>
 #include <iterator>
 #include "Engine/IO/Input.h"
@@ -8,6 +5,15 @@
 #include "Engine/GameEngine.h"
 #include "Engine/Graphics/Shaders/Shader.h"
 #include "Engine/Graphics/GL/VAO.h"
+#include "Game.h"
+
+void MoveSystem::tick(float dt, Entity* entity) {
+}
+
+PlayerEntity::PlayerEntity() {
+	registerComponent<PositionComponent>(std::make_unique<PositionComponent>());
+	registerComponent<VelocityComponent>(std::make_unique<VelocityComponent>());
+}
 
 template <size_t N>
 void adjustVertexData(std::array<GLfloat, N> vertexPos, GLint vbo, float xOffset, float yOffset) {
@@ -35,10 +41,7 @@ std::unique_ptr<ShaderProgram> loadShaders(std::string vertex_file_path, std::st
 		getchar();
 	}
 
-	std::unique_ptr<ShaderProgram> program;
-	program.reset(new ShaderProgram(vertexShaderCode, fragmentShaderCode));
-
-	return program;
+	return std::make_unique<ShaderProgram>(vertexShaderCode, fragmentShaderCode);
 }
 
 int main() {
@@ -52,6 +55,8 @@ int main() {
 	vao.bind();
 
 	// Array of vec3's which represent 4 vertices
+	PlayerEntity playerEntity;
+
 	std::array<GLfloat, 12> g_vertex_buffer_data = {
 		0.0f, 0.2f, 0.0f,
 		0.0f, 0.0f, 0.0f,
@@ -76,37 +81,15 @@ int main() {
 		return 1;
 	}
 
-	float xOffset = 0;
-	float yOffset = 0;
-
 	while (engine.isRunning()) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram->use();
-
-		if (isKeyDown(Key::W)) {
-			yOffset += 0.01f;
-		}
-		else if (isKeyDown(Key::S)) {
-			yOffset -= 0.01f;
-		}
-
-		if (isKeyDown(Key::D)) {
-			xOffset += 0.01f;
-		}
-		else if (isKeyDown(Key::A)) {
-			xOffset -= 0.01f;
-		}
-
 		glEnableVertexAttribArray(0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		adjustVertexData(g_vertex_buffer_data, vertexbuffer, xOffset, yOffset);
-
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
-
 		glDrawArrays(GL_LINE_LOOP, 0, 4);
-
 		glDisableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 

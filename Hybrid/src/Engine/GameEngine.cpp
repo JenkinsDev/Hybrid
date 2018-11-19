@@ -26,6 +26,32 @@ void GameEngine::changeActiveScreen(Screen* screen) {
 	if (!m_isGLInitialized) initializeGlew();
 }
 
+bool GameEngine::isRunning() {
+	return !glfwWindowShouldClose(m_screen->getWindow());
+}
+
+void GameEngine::addSystem(std::shared_ptr<System> system) {
+	m_systems.push_back(std::move(system));
+}
+
+void GameEngine::addEntity(std::unique_ptr<Entity> &&entity) {
+	m_entities.push_back(std::move(entity));
+}
+
+void GameEngine::tick() {
+	m_prevClock = m_currClock;
+	m_currClock = clock();
+	float dt = (m_currClock - m_prevClock) / (float)CLOCKS_PER_SEC;
+
+	// Run all systems against all entities. We'll start with a
+	// very naive systems approach.
+	for (int i = 0; i < m_systems.size(); i++) {
+		for (int j = 0; j < m_entities.size(); j++) {
+			m_systems[i]->tick(dt, m_entities[j].get());
+		}
+	}
+}
+
 void GameEngine::initializeGlew() {
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
@@ -41,8 +67,4 @@ void GameEngine::initializeGlew() {
 	const GLubyte* version = glGetString(GL_VERSION);
 	printf("Renderer: %s\n", renderer);
 	printf("OpenGL Version Supported %s\n", version);
-}
-
-bool GameEngine::isRunning() {
-	return !glfwWindowShouldClose(m_screen->getWindow());
 }
