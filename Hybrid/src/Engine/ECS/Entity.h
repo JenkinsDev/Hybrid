@@ -12,9 +12,9 @@ public:
 	ObjectID getObjectId() { return m_id; };
 
 	template <typename ComponentType>
-	ComponentType* get() {
-		auto found = m_components->find<ComponentType>();
-		if (found != m_components->end()) {
+	ComponentType* getComponent() {
+		auto found = m_components.find<ComponentType>();
+		if (found != m_components.end()) {
 			return static_cast<ComponentType*>(found->second.get());
 		}
 

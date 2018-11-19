@@ -16,10 +16,13 @@ public:
 };
 
 class VelocityComponent : public Component {
-	float xVelocity = 0.0f;
-	float yVelocity = 0.0f;
+	float m_xVelocity = 0.0f;
+	float m_yVelocity = 0.0f;
 public:
 	VelocityComponent() {};
+
+	float getXVelocity() { return m_xVelocity; };
+	float getYVelocity() { return m_yVelocity; };
 };
 
 class MoveSystem : public System {
