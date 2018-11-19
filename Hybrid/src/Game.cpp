@@ -11,6 +11,8 @@ void MoveSystem::tick(float dt, Entity* entity) {
 	PositionComponent* pos = entity->getComponent<PositionComponent>();
 	VelocityComponent* vel = entity->getComponent<VelocityComponent>();
 
+	if (pos == nullptr || vel == nullptr) return;
+
 	vel->getXVelocity();
 }
 
