@@ -157,6 +157,7 @@
     <ClInclude Include="libs\glfw\deps\mingw\xinput.h" />
     <ClInclude Include="libs\glfw\deps\tinycthread.h" />
     <ClInclude Include="libs\glfw\deps\vulkan\vulkan.h" />
+    <ClInclude Include="src\Components.h" />
     <ClInclude Include="src\Engine\ECS\Component.h" />
     <ClInclude Include="src\Engine\ECS\System.h" />
     <ClInclude Include="src\Engine\Exceptions.h" />

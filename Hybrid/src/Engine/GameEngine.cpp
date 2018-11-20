@@ -40,8 +40,10 @@ void GameEngine::addEntity(std::unique_ptr<Entity> &&entity) {
 
 void GameEngine::tick() {
 	m_prevClock = m_currClock;
-	m_currClock = clock();
-	float dt = (m_currClock - m_prevClock) / (float)CLOCKS_PER_SEC;
+	m_currClock = GameClock::now();
+
+	GameClockDuration duration = std::chrono::duration_cast<GameClockDuration>(m_currClock - m_prevClock);
+	float dt = duration.count() / CLOCKS_PER_SEC;
 
 	// Run all systems against all entities. We'll start with a
 	// very naive systems approach.
@@ -50,6 +52,8 @@ void GameEngine::tick() {
 			m_systems[i]->tick(dt, m_entities[j].get());
 		}
 	}
+
+	printf("Engine tick! %f Seconds since the last tick.\n", dt);
 }
 
 void GameEngine::initializeGlew() {

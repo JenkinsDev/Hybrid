@@ -1,28 +1,63 @@
 #include <array>
-#include <iterator>
 #include "Engine/IO/Input.h"
 #include "Engine/IO/File.h"
 #include "Engine/GameEngine.h"
 #include "Engine/Graphics/Shaders/Shader.h"
 #include "Engine/Graphics/GL/VAO.h"
 #include "Game.h"
+#include "Components.h"
+
+void InputSystem::tick(float dt, Entity* entity) {
+	VelocityComponent* vel = entity->getComponent<VelocityComponent>();
+	PlayerComponent* playerComponent = entity->getComponent<PlayerComponent>();
+	
+	if (vel == nullptr || playerComponent == nullptr) return;
+
+	if (isKeyDown(Key::W)) {
+		vel->setYVelocity(0.1f);
+	}
+	else if (isKeyDown(Key::S)) {
+		vel->setYVelocity(-0.1f);
+	}
+	else {
+		vel->setYVelocity(0.0f);
+	}
+
+	if (isKeyDown(Key::A)) {
+		vel->setXVelocity(0.1f);
+
+	}
+	else if (isKeyDown(Key::D)) {
+		vel->setXVelocity(-0.1f);
+	}
+	else {
+		vel->setXVelocity(0.0f);
+	}
+}
 
 void MoveSystem::tick(float dt, Entity* entity) {
 	PositionComponent* pos = entity->getComponent<PositionComponent>();
 	VelocityComponent* vel = entity->getComponent<VelocityComponent>();
 
+	// Entity doesn't have either a PositionComponent, VelocityComponent or neither.
 	if (pos == nullptr || vel == nullptr) return;
 
-	vel->getXVelocity();
+	float newX = pos->getX() + vel->getXVelocity();
+	float newY = pos->getY() + vel->getYVelocity();
+
+	printf("New Position: (%f, %f)", newX, newY);
+
+	pos->setPosition(newX, newY);
 }
 
 PlayerEntity::PlayerEntity() {
+	registerComponent<PlayerComponent>(std::make_unique<PlayerComponent>());
 	registerComponent<PositionComponent>(std::make_unique<PositionComponent>());
 	registerComponent<VelocityComponent>(std::make_unique<VelocityComponent>());
 }
 
 template <size_t N>
-void adjustVertexData(std::array<GLfloat, N> vertexPos, GLint vbo, float xOffset, float yOffset) {
+void adjustVertexData(std::array<GLfloat, N> vertexPos, float xOffset, float yOffset) {
 	std::array<GLfloat, N> newPos;
 	std::copy(vertexPos.begin(), vertexPos.end(), &newPos[0]);
 
@@ -60,9 +95,12 @@ int main() {
 	VAO vao;
 	vao.bind();
 
-	// Array of vec3's which represent 4 vertices
-	PlayerEntity playerEntity;
+	engine.addSystem(std::make_shared<InputSystem>());
+	engine.addSystem(std::make_shared<MoveSystem>());
 
+	engine.addEntity(std::make_unique<PlayerEntity>());
+
+	// Array of vec3's which represent 4 vertices
 	std::array<GLfloat, 12> g_vertex_buffer_data = {
 		0.0f, 0.2f, 0.0f,
 		0.0f, 0.0f, 0.0f,
@@ -88,6 +126,8 @@ int main() {
 	}
 
 	while (engine.isRunning()) {
+		engine.tick();
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram->use();

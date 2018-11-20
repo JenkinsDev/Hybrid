@@ -6,12 +6,14 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <ctime>
+#include <chrono>
 #include "Screen.h"
 #include "Exceptions.h"
 #include "ECS/System.h"
 
-typedef clock_t GameClock;
+typedef std::chrono::high_resolution_clock GameClock;
+typedef std::chrono::seconds GameClockDuration;
+typedef GameClock::time_point GameClockTimePoint;
 
 class GameEngine {
 	std::vector<std::shared_ptr<System>> m_systems;
@@ -25,8 +27,8 @@ public:
 	void addEntity(std::unique_ptr<Entity> &&entity);
 	void tick();
 private:
-	GameClock m_prevClock = clock();
-	GameClock m_currClock = clock();
+	GameClockTimePoint m_prevClock = GameClock::now();
+	GameClockTimePoint m_currClock = GameClock::now();
 	bool m_isGLInitialized = false;
 	Screen* m_screen;
 	void initializeGlew();
