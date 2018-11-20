@@ -6,6 +6,10 @@
 #include "Engine/ECS/Entity.h"
 #include "Engine/ECS/System.h"
 
+class RendererSystem : public System {
+	void tick(float dt, Entity* entity);
+};
+
 class MoveSystem : public System {
 	void tick(float dt, Entity* entity);
 };

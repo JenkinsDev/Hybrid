@@ -22,7 +22,6 @@ GameEngine::~GameEngine() {
 void GameEngine::changeActiveScreen(Screen* screen) {
 	m_screen = screen;
 	glfwMakeContextCurrent(screen->getWindow());
-
 	if (!m_isGLInitialized) initializeGlew();
 }
 

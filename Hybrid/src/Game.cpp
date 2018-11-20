@@ -7,6 +7,35 @@
 #include "Game.h"
 #include "Components.h"
 
+void RendererSystem::tick(float dt, Entity* entity) {
+	// We'll start with a very naive approach to rendering
+	PositionComponent* pos = entity->getComponent<PositionComponent>();
+	RectangleDrawableComponent* draw = entity->getComponent<RectangleDrawableComponent>();
+
+	if (pos == nullptr || draw == nullptr) return;
+
+	float xPos = pos->getX();
+	float yPos = pos->getY();
+
+	float width = draw->getWidth();
+	float height = draw->getHeight();
+
+	// Array of vec3's which represent 4 vertices
+	std::array<GLfloat, 12> g_vertex_buffer_data = {
+		xPos, yPos, 0.0f,
+		xPos+width, yPos, 0.0f,
+		xPos+width, yPos+height, 0.0f,
+		xPos, yPos+height, 0.0f,
+	};
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), &g_vertex_buffer_data[0], GL_STREAM_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
+	glDrawArrays(GL_LINE_LOOP, 0, 4);
+	glDisableVertexAttribArray(0);
+}
+
 void InputSystem::tick(float dt, Entity* entity) {
 	VelocityComponent* vel = entity->getComponent<VelocityComponent>();
 	PlayerComponent* playerComponent = entity->getComponent<PlayerComponent>();
@@ -14,21 +43,21 @@ void InputSystem::tick(float dt, Entity* entity) {
 	if (vel == nullptr || playerComponent == nullptr) return;
 
 	if (isKeyDown(Key::W)) {
-		vel->setYVelocity(0.1f);
+		vel->setYVelocity(0.01f);
 	}
 	else if (isKeyDown(Key::S)) {
-		vel->setYVelocity(-0.1f);
+		vel->setYVelocity(-0.01f);
 	}
 	else {
 		vel->setYVelocity(0.0f);
 	}
 
-	if (isKeyDown(Key::A)) {
-		vel->setXVelocity(0.1f);
+	if (isKeyDown(Key::D)) {
+		vel->setXVelocity(0.01f);
 
 	}
-	else if (isKeyDown(Key::D)) {
-		vel->setXVelocity(-0.1f);
+	else if (isKeyDown(Key::A)) {
+		vel->setXVelocity(-0.01f);
 	}
 	else {
 		vel->setXVelocity(0.0f);
@@ -54,6 +83,7 @@ PlayerEntity::PlayerEntity() {
 	registerComponent<PlayerComponent>(std::make_unique<PlayerComponent>());
 	registerComponent<PositionComponent>(std::make_unique<PositionComponent>());
 	registerComponent<VelocityComponent>(std::make_unique<VelocityComponent>());
+	registerComponent<RectangleDrawableComponent>(std::make_unique<RectangleDrawableComponent>());
 }
 
 template <size_t N>
@@ -97,47 +127,27 @@ int main() {
 
 	engine.addSystem(std::make_shared<InputSystem>());
 	engine.addSystem(std::make_shared<MoveSystem>());
+	engine.addSystem(std::make_shared<RendererSystem>());
 
 	engine.addEntity(std::make_unique<PlayerEntity>());
-
-	// Array of vec3's which represent 4 vertices
-	std::array<GLfloat, 12> g_vertex_buffer_data = {
-		0.0f, 0.2f, 0.0f,
-		0.0f, 0.0f, 0.0f,
-		0.2f, 0.0f, 0.0f,
-		0.2f, 0.2f, 0.0f,
-	};
 
 	// Create our variable that we will store our buffer in,
 	// then generate and store our buffer
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
-
-	// glBindBuffer tells OpenGL that we want to run the next commands
-	// on that buffer.
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	// Give our triangle vertices to OpenGL
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), &g_vertex_buffer_data[0], GL_STREAM_DRAW);
 
 	std::unique_ptr<ShaderProgram> shaderProgram = loadShaders("./res/shaders/vertex.shader", "./res/shaders/fragment.shader");
 	if (!shaderProgram->link()) {
 		fprintf(stderr, "Failed to link shader program: %s", shaderProgram->getError().c_str());
 		return 1;
 	}
+	shaderProgram->use();
 
 	while (engine.isRunning()) {
-		engine.tick();
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shaderProgram->use();
-		glEnableVertexAttribArray(0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
-		glDrawArrays(GL_LINE_LOOP, 0, 4);
-		glDisableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		engine.tick();
 
 		glfwSwapBuffers(screen.getWindow());
 		glfwPollEvents();

@@ -3,6 +3,14 @@
 
 #include "Engine/ECS/Component.h"
 
+class RectangleDrawableComponent : public Component {
+	float m_width = 0.2f;
+	float m_height = 0.5f;
+public:
+	float getWidth() { return m_width; };
+	float getHeight() { return m_height; };
+};
+
 class PlayerComponent : public Component {
 public:
 	PlayerComponent() {};
